@@ -16,7 +16,10 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			-- Global LSP keybindings setup
+			-- Add completion capabilities
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+			-- Global LSP keybindings
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
@@ -34,24 +37,23 @@ return {
 				end,
 			})
 
-			-- Configure lua_ls using new API
+			-- lua_ls
 			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
 				settings = {
 					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-						telemetry = {
-							enable = false,
-						},
+						diagnostics = { globals = { "vim" } },
+						telemetry = { enable = false },
 					},
 				},
 			})
 
-			-- Configure clangd using new API
-			vim.lsp.config("clangd", {})
+			-- clangd
+			vim.lsp.config("clangd", {
+				capabilities = capabilities,
+			})
 
-			-- Enable the language servers
+			-- Enable servers
 			vim.lsp.enable({ "lua_ls", "clangd" })
 		end,
 	},
