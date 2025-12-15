@@ -3,6 +3,7 @@ return {
 		"williamboman/mason.nvim",
 		opts = {},
 	},
+
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
@@ -10,13 +11,17 @@ return {
 			"neovim/nvim-lspconfig",
 		},
 		opts = {
-			ensure_installed = { "lua_ls", "clangd" },
+			ensure_installed = {
+				"lua_ls",
+				"clangd",
+			},
 		},
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			-- Add completion capabilities
+			-- Completion capabilities
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- Global LSP keybindings
@@ -24,6 +29,7 @@ return {
 				group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 				callback = function(ev)
 					local opts = { buffer = ev.buf }
+
 					vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 					vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 					vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -31,6 +37,7 @@ return {
 					vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 					vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+
 					vim.keymap.set("n", "<leader>f", function()
 						vim.lsp.buf.format({ async = true })
 					end, opts)
@@ -42,7 +49,9 @@ return {
 				capabilities = capabilities,
 				settings = {
 					Lua = {
-						diagnostics = { globals = { "vim" } },
+						diagnostics = {
+							globals = { "vim" },
+						},
 						telemetry = { enable = false },
 					},
 				},
@@ -54,7 +63,10 @@ return {
 			})
 
 			-- Enable servers
-			vim.lsp.enable({ "lua_ls", "clangd" })
+			vim.lsp.enable({
+				"lua_ls",
+				"clangd",
+			})
 		end,
 	},
 }
