@@ -9,10 +9,6 @@ return {
                 null_ls.builtins.formatting.clang_format,
             },
         })
-
-        vim.keymap.set("n", "<leader>gf", function()
-            vim.lsp.buf.format({ async = true })
-        end, {})
     end,
 }
 
