@@ -1,3 +1,6 @@
+-- Neo-tree file explorer
+-- File tree navigation and management
+
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -15,9 +18,6 @@ return {
 					},
 				},
 			})
-
-			vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", { desc = "Toggle Neo-tree" })
-			vim.keymap.set("n", "<C-o>", ":Neotree close<CR>", { desc = "Close Neo-tree" })
 		end,
 	},
 }

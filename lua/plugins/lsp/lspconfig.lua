@@ -1,26 +1,13 @@
+-- LSP Configuration
+-- Language Server Protocol setup and keybindings
+
 return {
-	{
-		"williamboman/mason.nvim",
-		opts = {},
-	},
-
-	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = {
-			"williamboman/mason.nvim",
-			"neovim/nvim-lspconfig",
-		},
-		opts = {
-			ensure_installed = {
-				"lua_ls",
-				"clangd",
-			},
-		},
-	},
-
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
+			-- Disable semantic tokens
+			vim.lsp.semantic_tokens.enable = false
+
 			-- Completion capabilities
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
